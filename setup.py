@@ -4,9 +4,9 @@ setup(
     name='ssSIG',
     version='1.0.0',
 
-    url='https://github.com/MichaelKim0407/tutorial-pip-package',
+    url='https://github.com/fjpreche/ssSIG.git',
     author='Francisco Perez-Reche',
-    author_email='fperez-reche@abdn.ac.uk',
+    author_email='fjpreche@gmail.com',
 
     packages=find_packages(),
 )
