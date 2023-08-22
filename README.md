@@ -1,2 +1,5 @@
 # ssSIG
-Subsampling method to identify relevant variables
+
+The ssSIG package implements the subsampling method proposed in 
+
+
