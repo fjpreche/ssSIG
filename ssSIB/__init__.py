@@ -32,9 +32,7 @@ import scipy.stats as ss
 import statsmodels.api as smapi
 from sklearn.preprocessing import StandardScaler
 
-def hello_world():
-    print("This is a pip package!")
-    
+   
 #----------------------------------------------------------------
 #----------------------------------------------------------------
 # Statistical functions
@@ -46,37 +44,6 @@ def entropy(f):
     else:
         s = -(f*np.log(f)+(1-f)*np.log(1-f))
     return s
-
-#----------------------------------------------------------------
-#----------------------------------------------------------------
-# Functions for plots
-#----------------------------------------------------------------
-#----------------------------------------------------------------
-def plot_logP_vs_f(flist,mean_logpval,median_logpval,logpv_qL,logpv_qU,intercept_Lnpval,slope_Lnpval):
-    plt.figure()
-    #plt.plot(n0set,pv_mean,'o-')
-    #plt.plot(flist,median_logpval,'o-',label='median')
-    plt.plot(flist,mean_logpval,'o-',label='mean')
-    plt.plot(flist,logpv_qL,'b-')
-    plt.plot(flist,logpv_qU,'b-')
-    plt.fill_between(flist,logpv_qL,logpv_qU, alpha = 0.2)
-    plt.axhline(y = np.log(0.05), color = 'black', ls='--', lw=2)
-    y_pred = [intercept_Lnpval+slope_Lnpval*x for x in flist]
-    plt.plot (flist, y_pred, '-', color='black', linewidth=1, label='Fit')
-
-    #plt.plot(n0set,np.log(np.zeros(len(n0set))+0.05))
-    plt.xlabel('$f$')
-    plt.ylabel('ln $p$')
-    plt.legend()
-    
-def plot_b_vs_logpb(pvalb_list,slopeb_list):
-    plt.figure()
-    plt.plot(np.log(pvalb_list),slopeb_list,'o')
-    plt.axhline(y = 0, color = 'black', ls='--', lw=1)
-    plt.axvline(x = np.log(0.05), color = 'black', ls='--', lw=1)
-
-    plt.xlabel('$\ln q_b$')
-    plt.ylabel('$b$') 
     
 #----------------------------------------------------------------
 #----------------------------------------------------------------
