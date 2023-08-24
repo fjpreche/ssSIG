@@ -6,7 +6,7 @@
 
 In the terminal or anaconda prompt, type:
 ```
-pip install -i https://test.pypi.org/simple/ ssSIG==1.0.1
+pip install -i https://test.pypi.org/simple/ ssSIG==1.0.2
 ```
 
 ## Tutorial 
