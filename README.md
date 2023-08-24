@@ -28,17 +28,17 @@ Default values for the input parameters of the functions are indicated in the de
 ### Testing one variable
 
 Functions to test one variable provide the following outputs:
-* `pvalb`: P-value $p_p$ for the slope of $\bar{L}_p$ vs. $f$.
+* `pp`: P-value $p_p$ for the slope of $\bar{L}_p$ vs. $f$.
 * `R2`: Coefficient of determination of the linear fit of $\bar{L}_p$ vs. $f$.
 * `slope_Lnpval`,`ciL_slope_Lnpval`,`ciU_slope_Lnpval`: Slope (`slope_Lnpval`) and limits for the 95% confidence interval of the slope, [`ciL_slope_Lnpval`,`ciU_slope_Lnpval`], corresponding to the linear fit of $\bar{L}_p$ vs. $f$.
 * `intercept_Lnpval`,`ciL_intercept_Lnpval`,`ciU_intercept_Lnpval`: Intercept (`intercept_Lnpval`) and limits for the 95% confidence interval of the intercept, [`ciL_intercept_Lnpval`,`ciU_intercept_Lnpval`], corresponding to the linear fit of $\bar{L}_p$ vs. $f$.
 * `flist`: List of values for the subsampling fraction $f$.
 * mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU: Mean ($\bar{L}_p$), median, standard deviation and 95% confidence interval limits for $L_p$ as a function of $f$.
 * `power`: Power ($1-\beta$) as a function of the subsample fraction $f$. The false negative rate, $\beta$, can be obtained as 1-`power`
-* `pvalb_fnr`: P-value, $p_{\beta}$, the slope of $\bar{L}_{\beta}$ vs. $f$.
-* `R2_fnr`: Coefficient of determination of the linear fit of $\bar{L}_{\beta}$ vs. $f$.
-* `slope_Lnpval_fnr`,`ciL_slope_Lnpval_fnr`,`ciU_slope_Lnpval_fnr`: Slope (`slope_Lnpval_fnr`) and limits for the 95% confidence interval of the slope, [`ciL_slope_Lnpval_fnr`,`ciU_slope_Lnpval_fnr`], corresponding to the linear fit of $\bar{L}_{\beta}$ vs. $f$.
-* `intercept_Lnpval_fnr`,`ciL_intercept_Lnpval_fnr`,`ciU_intercept_Lnpval_fnr`: Intercept (`intercept_Lnpval_fnr`) and limits for the 95% confidence interval of the intercept, [`ciL_intercept_Lnpval_fnr`,`ciU_intercept_Lnpval_fnr`], corresponding to the linear fit of $\bar{L}_{\beta}$ vs. $f$.
+* `p_beta`: P-value, $p_{\beta}$, the slope of $\bar{L}_{\beta}$ vs. $f$.
+* `R2_beta`: Coefficient of determination of the linear fit of $\bar{L}_{\beta}$ vs. $f$.
+* `slope_Lnbeta`,`ciL_slope_Lnbeta`,`ciU_slope_Lnbeta`: Slope (`slope_Lnbeta`) and limits for the 95% confidence interval of the slope, [`ciL_slope_Lnbeta`,`ciU_slope_Lnbeta`], corresponding to the linear fit of $\bar{L}_{\beta}$ vs. $f$.
+* `intercept_Lnbeta`,`ciL_intercept_Lnbeta`,`ciU_intercept_Lnbeta`: Intercept (`intercept_Lnbeta`) and limits for the 95% confidence interval of the intercept, [`ciL_intercept_Lnbeta`,`ciU_intercept_Lnbeta`], corresponding to the linear fit of $\bar{L}_{\beta}$ vs. $f$.
 
 
 #### One sample, `x`
@@ -106,11 +106,8 @@ For these functions, information on the data requires three inputs:
 * `classname`: Title of the column with class labels in the `features` dataframe.
 
 The functions for multiple testing provide the following outputs:
-
-* `R2`: Coefficient of determination of the linear fit of $\bar{L}_p$ vs. $f$.
-* `slope_Lnpval`,`ciL_slope_Lnpval`,`ciU_slope_Lnpval`: Slope (`slope_Lnpval`) and limits for the 95% confidence interval of the slope, [`ciL_slope_Lnpval`,`ciU_slope_Lnpval`], corresponding to the linear fit of $\bar{L}_p$ vs. $f$.
-* `intercept_Lnpval`,`ciL_intercept_Lnpval`,`ciU_intercept_Lnpval`: Intercept (`intercept_Lnpval`) and limits for the 95% confidence interval of the intercept, [`ciL_intercept_Lnpval`,`ciU_intercept_Lnpval`], corresponding to the linear fit of $\bar{L}_p$ vs. $f$.
-* `pvalb`: P-value $p_p$ for the slope of $\bar{L}_p$ vs. $f$.
+* `pp`: P-value $p_p$ for the slope of $\bar{L}_p$ vs. $f$.
+* `pp_beta`: P-value, $p_{\beta}$, the slope of $\bar{L}_{\beta}$ vs. $f$.
 
 #### Two classes
 ```
