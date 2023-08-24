@@ -1132,7 +1132,7 @@ def kruskal_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_p
 #----------------------------------------------------------------
 
 #### --- Two classes (t-test, Mann-Whitney, Kolmogorov-Smirnov, Logistic regression)
-def Multiple_tests_2classes(features,featurenames,classname,nrealisations,fmin,fmax,Df,SigMethod,alpha=0.05,th_beta=0.5):
+def Multiple_tests_2classes(features,featurenames,classname,Rsubsamples,fmin,fmax,Df,SigMethod,alpha=0.05,th_beta=0.5):
     
     n0 = len(features[classname][features[classname] == 0])
     n1 = len(features[classname][features[classname] == 1])
@@ -1165,10 +1165,10 @@ def Multiple_tests_2classes(features,featurenames,classname,nrealisations,fmin,f
         for i in range(imax+1):
             f = flist[i]
 
-            nr = nrealisations
-            ln_nent = nrealisations*entropy(f)
+            nr = Rsubsamples
+            ln_nent = Rsubsamples*entropy(f)
             
-            if np.log(nrealisations)>ln_nent:
+            if np.log(Rsubsamples)>ln_nent:
                 nr = np.floor(ln_nent).astype(int)
             nr = np.max([nr,1])
             
@@ -1261,7 +1261,7 @@ def Multiple_tests_2classes(features,featurenames,classname,nrealisations,fmin,f
 
 #### --- Three classes (one way ANOVA or Kruskal-Wallis)
 #--
-def Multiple_tests_3classes(features,featurenames,classname,nrealisations,fmin,fmax,Df,SigMethod,alpha=0.05,th_beta=0.5):
+def Multiple_tests_3classes(features,featurenames,classname,Rsubsamples,fmin,fmax,Df,SigMethod,alpha=0.05,th_beta=0.5):
     
     n0 = len(features[classname][features[classname] == 0])
     n1 = len(features[classname][features[classname] == 1])
@@ -1294,10 +1294,10 @@ def Multiple_tests_3classes(features,featurenames,classname,nrealisations,fmin,f
         for i in range(imax+1):
             f = flist[i]
 
-            nr = nrealisations
-            ln_nent = nrealisations*entropy(f)
+            nr = Rsubsamples
+            ln_nent = Rsubsamples*entropy(f)
             
-            if np.log(nrealisations)>ln_nent:
+            if np.log(Rsubsamples)>ln_nent:
                 nr = np.floor(ln_nent).astype(int)
             nr = np.max([nr,1])
             
