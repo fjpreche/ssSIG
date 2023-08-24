@@ -51,7 +51,7 @@ def entropy(f):
 #----------------------------------------------------------------
 #----------------------------------------------------------------
 
-def ttest_1samp_ssSIG(data,null_mu,Rsubsamples,fmin,fmax,Df,nan_policy='propagate', alternative='two-sided',alpha=0.05,th_beta=0.5):
+def ttest_1samp_ssSIG(data,null_mu,Rsubsamples,fmin,fmax,Df, alternative='two-sided',alpha=0.05,th_beta=0.5):
     n0 = len(data)
     imax = int(np.floor((fmax-fmin)/Df))
 
@@ -116,11 +116,11 @@ def ttest_1samp_ssSIG(data,null_mu,Rsubsamples,fmin,fmax,Df,nan_policy='propagat
     R2 = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb = ss.t.cdf(results.tvalues[1], df)
+    pp = ss.t.cdf(results.tvalues[1], df)
     
     #----
     #------ Linear fit to ln(fnr) vs f. fnr = 1-power is the false negative rate
@@ -133,26 +133,26 @@ def ttest_1samp_ssSIG(data,null_mu,Rsubsamples,fmin,fmax,Df,nan_policy='propagat
     model = smapi.OLS(y,X,missing='drop')
     results = model.fit()
 
-    slope_Lnpval_fnr = results.params[1]
+    slope_Lnbeta = results.params[1]
 
-    ciL_slope_Lnpval_fnr = results.conf_int()[1][0]
-    ciU_slope_Lnpval_fnr = results.conf_int()[1][1]
+    ciL_slope_Lnbeta = results.conf_int()[1][0]
+    ciU_slope_Lnbeta = results.conf_int()[1][1]
 
-    intercept_Lnpval_fnr = results.params[0]
+    intercept_Lnbeta = results.params[0]
 
-    ciL_intercept_Lnpval_fnr = results.conf_int()[0][0]
-    ciU_intercept_Lnpval_fnr = results.conf_int()[0][1]
+    ciL_intercept_Lnbeta = results.conf_int()[0][0]
+    ciU_intercept_Lnbeta = results.conf_int()[0][1]
 
-    R2_fnr = results.rsquared
+    R2_beta = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb_fnr = ss.t.cdf(results.tvalues[1], df)
+    p_beta = ss.t.cdf(results.tvalues[1], df)
 
-    return pvalb,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,pvalb_fnr,R2_fnr,slope_Lnpval_fnr,ciL_slope_Lnpval_fnr,ciU_slope_Lnpval_fnr,intercept_Lnpval_fnr,ciL_intercept_Lnpval_fnr,ciU_intercept_Lnpval_fnr
+    return pp,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,p_beta,R2_beta,slope_Lnbeta,ciL_slope_Lnbeta,ciU_slope_Lnbeta,intercept_Lnbeta,ciL_intercept_Lnbeta,ciU_intercept_Lnbeta
 
 #----------------------------------------------------------------
 #----------------------------------------------------------------
@@ -164,7 +164,7 @@ def ttest_1samp_ssSIG(data,null_mu,Rsubsamples,fmin,fmax,Df,nan_policy='propagat
 ## t-test on TWO RELATED samples of scores, a and b
 ## ----------------------------------------------------------------------------
 
-def ttest_rel_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,axis=0, alternative='two-sided', keepdims=False,alpha=0.05,th_beta=0.5):
+def ttest_rel_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,axis=0, alternative='two-sided',alpha=0.05,th_beta=0.5):
     n0 = len(x0)
     n1 = len(x1)
     imax = int(np.floor((fmax-fmin)/Df))
@@ -232,11 +232,11 @@ def ttest_rel_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,axis=0, alternative='two-side
     R2 = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb = ss.t.cdf(results.tvalues[1], df)
+    pp = ss.t.cdf(results.tvalues[1], df)
     
     #----
     #------ Linear fit to ln(fnr) vs f. fnr = 1-power is the false negative rate
@@ -249,26 +249,26 @@ def ttest_rel_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,axis=0, alternative='two-side
     model = smapi.OLS(y,X,missing='drop')
     results = model.fit()
 
-    slope_Lnpval_fnr = results.params[1]
+    slope_Lnbeta = results.params[1]
 
-    ciL_slope_Lnpval_fnr = results.conf_int()[1][0]
-    ciU_slope_Lnpval_fnr = results.conf_int()[1][1]
+    ciL_slope_Lnbeta = results.conf_int()[1][0]
+    ciU_slope_Lnbeta = results.conf_int()[1][1]
 
-    intercept_Lnpval_fnr = results.params[0]
+    intercept_Lnbeta = results.params[0]
 
-    ciL_intercept_Lnpval_fnr = results.conf_int()[0][0]
-    ciU_intercept_Lnpval_fnr = results.conf_int()[0][1]
+    ciL_intercept_Lnbeta = results.conf_int()[0][0]
+    ciU_intercept_Lnbeta = results.conf_int()[0][1]
 
-    R2_fnr = results.rsquared
+    R2_beta = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb_fnr = ss.t.cdf(results.tvalues[1], df)
+    p_beta = ss.t.cdf(results.tvalues[1], df)
 
-    return pvalb,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,pvalb_fnr,R2_fnr,slope_Lnpval_fnr,ciL_slope_Lnpval_fnr,ciU_slope_Lnpval_fnr,intercept_Lnpval_fnr,ciL_intercept_Lnpval_fnr,ciU_intercept_Lnpval_fnr
+    return pp,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,p_beta,R2_beta,slope_Lnbeta,ciL_slope_Lnbeta,ciU_slope_Lnbeta,intercept_Lnbeta,ciL_intercept_Lnbeta,ciU_intercept_Lnbeta
 
 
 ## ----------------------------------------------------------------------------
@@ -347,11 +347,11 @@ def wilcoxon_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df, alternative='two-sided', alph
     R2 = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb = ss.t.cdf(results.tvalues[1], df)
+    pp = ss.t.cdf(results.tvalues[1], df)
     
     #----
     #------ Linear fit to ln(fnr) vs f. fnr = 1-power is the false negative rate
@@ -364,26 +364,26 @@ def wilcoxon_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df, alternative='two-sided', alph
     model = smapi.OLS(y,X,missing='drop')
     results = model.fit()
 
-    slope_Lnpval_fnr = results.params[1]
+    slope_Lnbeta = results.params[1]
 
-    ciL_slope_Lnpval_fnr = results.conf_int()[1][0]
-    ciU_slope_Lnpval_fnr = results.conf_int()[1][1]
+    ciL_slope_Lnbeta = results.conf_int()[1][0]
+    ciU_slope_Lnbeta = results.conf_int()[1][1]
 
-    intercept_Lnpval_fnr = results.params[0]
+    intercept_Lnbeta = results.params[0]
 
-    ciL_intercept_Lnpval_fnr = results.conf_int()[0][0]
-    ciU_intercept_Lnpval_fnr = results.conf_int()[0][1]
+    ciL_intercept_Lnbeta = results.conf_int()[0][0]
+    ciU_intercept_Lnbeta = results.conf_int()[0][1]
 
-    R2_fnr = results.rsquared
+    R2_beta = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb_fnr = ss.t.cdf(results.tvalues[1], df)
+    p_beta = ss.t.cdf(results.tvalues[1], df)
 
-    return pvalb,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,pvalb_fnr,R2_fnr,slope_Lnpval_fnr,ciL_slope_Lnpval_fnr,ciU_slope_Lnpval_fnr,intercept_Lnpval_fnr,ciL_intercept_Lnpval_fnr,ciU_intercept_Lnpval_fnr
+    return pp,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,p_beta,R2_beta,slope_Lnbeta,ciL_slope_Lnbeta,ciU_slope_Lnbeta,intercept_Lnbeta,ciL_intercept_Lnbeta,ciU_intercept_Lnbeta
 
 
 #----------------------------------------------------------------
@@ -396,7 +396,7 @@ def wilcoxon_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df, alternative='two-sided', alph
 ## t-test for the means of two independent samples of scores.
 ## ----------------------------------------------------------------------------
 
-def ttest_ind_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df, alternative='two-sided',permutations=None, random_state=None,alpha=0.05,th_beta=0.5):
+def ttest_ind_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df, alternative='two-sided',alpha=0.05,th_beta=0.5):
     n0 = len(x0)
     n1 = len(x1)
     imax = int(np.floor((fmax-fmin)/Df))
@@ -464,11 +464,11 @@ def ttest_ind_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df, alternative='two-sided',perm
     R2 = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb = ss.t.cdf(results.tvalues[1], df)
+    pp = ss.t.cdf(results.tvalues[1], df)
     
     #----
     #------ Linear fit to ln(fnr) vs f. fnr = 1-power is the false negative rate
@@ -481,33 +481,33 @@ def ttest_ind_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df, alternative='two-sided',perm
     model = smapi.OLS(y,X,missing='drop')
     results = model.fit()
 
-    slope_Lnpval_fnr = results.params[1]
+    slope_Lnbeta = results.params[1]
 
-    ciL_slope_Lnpval_fnr = results.conf_int()[1][0]
-    ciU_slope_Lnpval_fnr = results.conf_int()[1][1]
+    ciL_slope_Lnbeta = results.conf_int()[1][0]
+    ciU_slope_Lnbeta = results.conf_int()[1][1]
 
-    intercept_Lnpval_fnr = results.params[0]
+    intercept_Lnbeta = results.params[0]
 
-    ciL_intercept_Lnpval_fnr = results.conf_int()[0][0]
-    ciU_intercept_Lnpval_fnr = results.conf_int()[0][1]
+    ciL_intercept_Lnbeta = results.conf_int()[0][0]
+    ciU_intercept_Lnbeta = results.conf_int()[0][1]
 
-    R2_fnr = results.rsquared
+    R2_beta = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb_fnr = ss.t.cdf(results.tvalues[1], df)
+    p_beta = ss.t.cdf(results.tvalues[1], df)
 
-    return pvalb,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,pvalb_fnr,R2_fnr,slope_Lnpval_fnr,ciL_slope_Lnpval_fnr,ciU_slope_Lnpval_fnr,intercept_Lnpval_fnr,ciL_intercept_Lnpval_fnr,ciU_intercept_Lnpval_fnr
+    return pp,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,p_beta,R2_beta,slope_Lnbeta,ciL_slope_Lnbeta,ciU_slope_Lnbeta,intercept_Lnbeta,ciL_intercept_Lnbeta,ciU_intercept_Lnbeta
 
 
 ## ----------------------------------------------------------------------------
 ## Logistic regression for two independent samples of scores.
 ## ----------------------------------------------------------------------------
 
-def logreg_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_policy='propagate', alternative='two-sided',permutations=None, random_state=None):
+def logreg_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5):
     n0 = len(x0)
     n1 = len(x1)
     imax = int(np.floor((fmax-fmin)/Df))
@@ -589,11 +589,11 @@ def logreg_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_p
     R2 = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb = ss.t.cdf(results.tvalues[1], df)
+    pp = ss.t.cdf(results.tvalues[1], df)
     
     #----
     #------ Linear fit to ln(fnr) vs f. fnr = 1-power is the false negative rate
@@ -606,26 +606,26 @@ def logreg_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_p
     model = smapi.OLS(y,X,missing='drop')
     results = model.fit()
 
-    slope_Lnpval_fnr = results.params[1]
+    slope_Lnbeta = results.params[1]
 
-    ciL_slope_Lnpval_fnr = results.conf_int()[1][0]
-    ciU_slope_Lnpval_fnr = results.conf_int()[1][1]
+    ciL_slope_Lnbeta = results.conf_int()[1][0]
+    ciU_slope_Lnbeta = results.conf_int()[1][1]
 
-    intercept_Lnpval_fnr = results.params[0]
+    intercept_Lnbeta = results.params[0]
 
-    ciL_intercept_Lnpval_fnr = results.conf_int()[0][0]
-    ciU_intercept_Lnpval_fnr = results.conf_int()[0][1]
+    ciL_intercept_Lnbeta = results.conf_int()[0][0]
+    ciU_intercept_Lnbeta = results.conf_int()[0][1]
 
-    R2_fnr = results.rsquared
+    R2_beta = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb_fnr = ss.t.cdf(results.tvalues[1], df)
+    p_beta = ss.t.cdf(results.tvalues[1], df)
 
-    return pvalb,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,pvalb_fnr,R2_fnr,slope_Lnpval_fnr,ciL_slope_Lnpval_fnr,ciU_slope_Lnpval_fnr,intercept_Lnpval_fnr,ciL_intercept_Lnpval_fnr,ciU_intercept_Lnpval_fnr
+    return pp,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,p_beta,R2_beta,slope_Lnbeta,ciL_slope_Lnbeta,ciU_slope_Lnbeta,intercept_Lnbeta,ciL_intercept_Lnbeta,ciU_intercept_Lnbeta
 
 ## ----------------------------------------------------------------------------
 ## Mann-Whitney U rank test on two independent samples
@@ -698,11 +698,11 @@ def mannwhitneyu_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,alternative='two-sided',al
     R2 = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb = ss.t.cdf(results.tvalues[1], df)
+    pp = ss.t.cdf(results.tvalues[1], df)
     
     #----
     #------ Linear fit to ln(fnr) vs f. fnr = 1-power is the false negative rate
@@ -715,26 +715,26 @@ def mannwhitneyu_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,alternative='two-sided',al
     model = smapi.OLS(y,X,missing='drop')
     results = model.fit()
 
-    slope_Lnpval_fnr = results.params[1]
+    slope_Lnbeta = results.params[1]
 
-    ciL_slope_Lnpval_fnr = results.conf_int()[1][0]
-    ciU_slope_Lnpval_fnr = results.conf_int()[1][1]
+    ciL_slope_Lnbeta = results.conf_int()[1][0]
+    ciU_slope_Lnbeta = results.conf_int()[1][1]
 
-    intercept_Lnpval_fnr = results.params[0]
+    intercept_Lnbeta = results.params[0]
 
-    ciL_intercept_Lnpval_fnr = results.conf_int()[0][0]
-    ciU_intercept_Lnpval_fnr = results.conf_int()[0][1]
+    ciL_intercept_Lnbeta = results.conf_int()[0][0]
+    ciU_intercept_Lnbeta = results.conf_int()[0][1]
 
-    R2_fnr = results.rsquared
+    R2_beta = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb_fnr = ss.t.cdf(results.tvalues[1], df)
+    p_beta = ss.t.cdf(results.tvalues[1], df)
 
-    return pvalb,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,pvalb_fnr,R2_fnr,slope_Lnpval_fnr,ciL_slope_Lnpval_fnr,ciU_slope_Lnpval_fnr,intercept_Lnpval_fnr,ciL_intercept_Lnpval_fnr,ciU_intercept_Lnpval_fnr
+    return pp,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,p_beta,R2_beta,slope_Lnbeta,ciL_slope_Lnbeta,ciU_slope_Lnbeta,intercept_Lnbeta,ciL_intercept_Lnbeta,ciU_intercept_Lnbeta
 
 
 ## ----------------------------------------------------------------------------
@@ -809,11 +809,11 @@ def ks_2samp_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,alternative='two-sided',alpha=
     R2 = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb = ss.t.cdf(results.tvalues[1], df)
+    pp = ss.t.cdf(results.tvalues[1], df)
     
     #----
     #------ Linear fit to ln(fnr) vs f. fnr = 1-power is the false negative rate
@@ -826,26 +826,26 @@ def ks_2samp_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,alternative='two-sided',alpha=
     model = smapi.OLS(y,X,missing='drop')
     results = model.fit()
 
-    slope_Lnpval_fnr = results.params[1]
+    slope_Lnbeta = results.params[1]
 
-    ciL_slope_Lnpval_fnr = results.conf_int()[1][0]
-    ciU_slope_Lnpval_fnr = results.conf_int()[1][1]
+    ciL_slope_Lnbeta = results.conf_int()[1][0]
+    ciU_slope_Lnbeta = results.conf_int()[1][1]
 
-    intercept_Lnpval_fnr = results.params[0]
+    intercept_Lnbeta = results.params[0]
 
-    ciL_intercept_Lnpval_fnr = results.conf_int()[0][0]
-    ciU_intercept_Lnpval_fnr = results.conf_int()[0][1]
+    ciL_intercept_Lnbeta = results.conf_int()[0][0]
+    ciU_intercept_Lnbeta = results.conf_int()[0][1]
 
-    R2_fnr = results.rsquared
+    R2_beta = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb_fnr = ss.t.cdf(results.tvalues[1], df)
+    p_beta = ss.t.cdf(results.tvalues[1], df)
 
-    return pvalb,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,pvalb_fnr,R2_fnr,slope_Lnpval_fnr,ciL_slope_Lnpval_fnr,ciU_slope_Lnpval_fnr,intercept_Lnpval_fnr,ciL_intercept_Lnpval_fnr,ciU_intercept_Lnpval_fnr
+    return pp,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,p_beta,R2_beta,slope_Lnbeta,ciL_slope_Lnbeta,ciU_slope_Lnbeta,intercept_Lnbeta,ciL_intercept_Lnbeta,ciU_intercept_Lnbeta
 
 
 #----------------------------------------------------------------
@@ -859,7 +859,7 @@ def ks_2samp_ssSIG(x0,x1,Rsubsamples,fmin,fmax,Df,alternative='two-sided',alpha=
 # The test is applied to samples from two or more groups, possibly with differing sizes.
 ##-----------------------------------------------------------------------------------
 
-def f_oneway_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_policy='propagate', alternative='two-sided',permutations=None, random_state=None):
+def f_oneway_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5):
     k = len(data)
 
     nlist = []
@@ -948,11 +948,11 @@ def f_oneway_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_
     R2 = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb = ss.t.cdf(results.tvalues[1], df)
+    pp = ss.t.cdf(results.tvalues[1], df)
     
     #----
     #------ Linear fit to ln(fnr) vs f. fnr = 1-power is the false negative rate
@@ -965,26 +965,26 @@ def f_oneway_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_
     model = smapi.OLS(y,X,missing='drop')
     results = model.fit()
 
-    slope_Lnpval_fnr = results.params[1]
+    slope_Lnbeta = results.params[1]
 
-    ciL_slope_Lnpval_fnr = results.conf_int()[1][0]
-    ciU_slope_Lnpval_fnr = results.conf_int()[1][1]
+    ciL_slope_Lnbeta = results.conf_int()[1][0]
+    ciU_slope_Lnbeta = results.conf_int()[1][1]
 
-    intercept_Lnpval_fnr = results.params[0]
+    intercept_Lnbeta = results.params[0]
 
-    ciL_intercept_Lnpval_fnr = results.conf_int()[0][0]
-    ciU_intercept_Lnpval_fnr = results.conf_int()[0][1]
+    ciL_intercept_Lnbeta = results.conf_int()[0][0]
+    ciU_intercept_Lnbeta = results.conf_int()[0][1]
 
-    R2_fnr = results.rsquared
+    R2_beta = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb_fnr = ss.t.cdf(results.tvalues[1], df)
+    p_beta = ss.t.cdf(results.tvalues[1], df)
 
-    return pvalb,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,pvalb_fnr,R2_fnr,slope_Lnpval_fnr,ciL_slope_Lnpval_fnr,ciU_slope_Lnpval_fnr,intercept_Lnpval_fnr,ciL_intercept_Lnpval_fnr,ciU_intercept_Lnpval_fnr
+    return pp,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,p_beta,R2_beta,slope_Lnbeta,ciL_slope_Lnbeta,ciU_slope_Lnbeta,intercept_Lnbeta,ciL_intercept_Lnbeta,ciU_intercept_Lnbeta
 
 
 ## ----------------------------------------------------------------------------
@@ -995,7 +995,7 @@ def f_oneway_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_
 #Post hoc comparisons between groups are required to determine which groups are different.
 ## ----------------------------------------------------------------------------
 
-def kruskal_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_policy='propagate', alternative='two-sided',permutations=None, random_state=None):
+def kruskal_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5):
     k = len(data)
 
     nlist = []
@@ -1086,11 +1086,11 @@ def kruskal_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_p
     R2 = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb = ss.t.cdf(results.tvalues[1], df)
+    pp = ss.t.cdf(results.tvalues[1], df)
     
     #----
     #------ Linear fit to ln(fnr) vs f. fnr = 1-power is the false negative rate
@@ -1103,26 +1103,26 @@ def kruskal_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_p
     model = smapi.OLS(y,X,missing='drop')
     results = model.fit()
 
-    slope_Lnpval_fnr = results.params[1]
+    slope_Lnbeta = results.params[1]
 
-    ciL_slope_Lnpval_fnr = results.conf_int()[1][0]
-    ciU_slope_Lnpval_fnr = results.conf_int()[1][1]
+    ciL_slope_Lnbeta = results.conf_int()[1][0]
+    ciU_slope_Lnbeta = results.conf_int()[1][1]
 
-    intercept_Lnpval_fnr = results.params[0]
+    intercept_Lnbeta = results.params[0]
 
-    ciL_intercept_Lnpval_fnr = results.conf_int()[0][0]
-    ciU_intercept_Lnpval_fnr = results.conf_int()[0][1]
+    ciL_intercept_Lnbeta = results.conf_int()[0][0]
+    ciU_intercept_Lnbeta = results.conf_int()[0][1]
 
-    R2_fnr = results.rsquared
+    R2_beta = results.rsquared
 
     #Two-sided test
-    #pvalb = results.pvalues[1]
+    #pp = results.pvalues[1]
 
     # One-sided p-value for the slope (negative slope is significant)
     df = results.df_resid
-    pvalb_fnr = ss.t.cdf(results.tvalues[1], df)
+    p_beta = ss.t.cdf(results.tvalues[1], df)
 
-    return pvalb,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,pvalb_fnr,R2_fnr,slope_Lnpval_fnr,ciL_slope_Lnpval_fnr,ciU_slope_Lnpval_fnr,intercept_Lnpval_fnr,ciL_intercept_Lnpval_fnr,ciU_intercept_Lnpval_fnr
+    return pp,R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,flist,mean_logpval,median_logpval,sd_logpval,logpv_qL,logpv_qU,power,p_beta,R2_beta,slope_Lnbeta,ciL_slope_Lnbeta,ciU_slope_Lnbeta,intercept_Lnbeta,ciL_intercept_Lnbeta,ciU_intercept_Lnbeta
 
 
 #----------------------------------------------------------------
@@ -1132,7 +1132,7 @@ def kruskal_ssSIG(data,Rsubsamples,fmin,fmax,Df,alpha=0.05,th_beta=0.5): #,nan_p
 #----------------------------------------------------------------
 
 #### --- Two classes (t-test, Mann-Whitney, Kolmogorov-Smirnov, Logistic regression)
-def Multiple_tests_2classes(features,featurenames,classname,Rsubsamples,fmin,fmax,Df,SigMethod,alpha=0.05,th_beta=0.5):
+def Multiple_tests_2classes(features,featurenames,classname,nrealisations,fmin,fmax,Df,SigMethod,alpha=0.05,th_beta=0.5):
     
     n0 = len(features[classname][features[classname] == 0])
     n1 = len(features[classname][features[classname] == 1])
@@ -1151,8 +1151,8 @@ def Multiple_tests_2classes(features,featurenames,classname,Rsubsamples,fmin,fma
     ciU_intercept_Lnpval = np.zeros(len(met_names))
 
     R2 = np.zeros(len(met_names))
-    pvalb = np.zeros(len(met_names))
-    pvalb_beta = np.zeros(len(met_names))
+    pp = np.zeros(len(met_names))
+    pp_beta = np.zeros(len(met_names))
     
     for m in range(len(met_names)):
     #for m in range(10):
@@ -1165,10 +1165,10 @@ def Multiple_tests_2classes(features,featurenames,classname,Rsubsamples,fmin,fma
         for i in range(imax+1):
             f = flist[i]
 
-            nr = Rsubsamples
-            ln_nent = Rsubsamples*entropy(f)
+            nr = nrealisations
+            ln_nent = nrealisations*entropy(f)
             
-            if np.log(Rsubsamples)>ln_nent:
+            if np.log(nrealisations)>ln_nent:
                 nr = np.floor(ln_nent).astype(int)
             nr = np.max([nr,1])
             
@@ -1232,11 +1232,11 @@ def Multiple_tests_2classes(features,featurenames,classname,Rsubsamples,fmin,fma
         ciU_intercept_Lnpval[m] = results.conf_int()[0][1]
 
         R2[m] = results.rsquared
-        #pvalb[m] = results.pvalues[1]
+        #pp[m] = results.pvalues[1]
         
         # One-sided p-value for the slope (negative slope is significant)
         df = results.df_resid
-        pvalb[m] = ss.t.cdf(results.tvalues[1], df)
+        pp[m] = ss.t.cdf(results.tvalues[1], df)
         
         
         #----
@@ -1253,15 +1253,15 @@ def Multiple_tests_2classes(features,featurenames,classname,Rsubsamples,fmin,fma
         results = model.fit()
         #
         df = results.df_resid
-        pvalb_beta[m] = ss.t.cdf(results.tvalues[1], df)
+        pp_beta[m] = ss.t.cdf(results.tvalues[1], df)
         
         
-    return R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,pvalb,pvalb_beta
+    return pp,pp_beta
 
 
 #### --- Three classes (one way ANOVA or Kruskal-Wallis)
 #--
-def Multiple_tests_3classes(features,featurenames,classname,Rsubsamples,fmin,fmax,Df,SigMethod,alpha=0.05,th_beta=0.5):
+def Multiple_tests_3classes(features,featurenames,classname,nrealisations,fmin,fmax,Df,SigMethod,alpha=0.05,th_beta=0.5):
     
     n0 = len(features[classname][features[classname] == 0])
     n1 = len(features[classname][features[classname] == 1])
@@ -1281,8 +1281,8 @@ def Multiple_tests_3classes(features,featurenames,classname,Rsubsamples,fmin,fma
     ciU_intercept_Lnpval = np.zeros(len(met_names))
 
     R2 = np.zeros(len(met_names))
-    pvalb = np.zeros(len(met_names))
-    pvalb_beta = np.zeros(len(met_names))
+    pp = np.zeros(len(met_names))
+    pp_beta = np.zeros(len(met_names))
     
     for m in range(len(met_names)):
     #for m in range(10):
@@ -1294,10 +1294,10 @@ def Multiple_tests_3classes(features,featurenames,classname,Rsubsamples,fmin,fma
         for i in range(imax+1):
             f = flist[i]
 
-            nr = Rsubsamples
-            ln_nent = Rsubsamples*entropy(f)
+            nr = nrealisations
+            ln_nent = nrealisations*entropy(f)
             
-            if np.log(Rsubsamples)>ln_nent:
+            if np.log(nrealisations)>ln_nent:
                 nr = np.floor(ln_nent).astype(int)
             nr = np.max([nr,1])
             
@@ -1345,11 +1345,11 @@ def Multiple_tests_3classes(features,featurenames,classname,Rsubsamples,fmin,fma
         ciU_intercept_Lnpval[m] = results.conf_int()[0][1]
 
         R2[m] = results.rsquared
-        #pvalb[m] = results.pvalues[1]
+        #pp[m] = results.pvalues[1]
         
         # One-sided p-value for the slope (negative slope is significant)
         df = results.df_resid
-        pvalb[m] = ss.t.cdf(results.tvalues[1], df)
+        pp[m] = ss.t.cdf(results.tvalues[1], df)
         
         #----
         #------ Linear fit to ln(beta) vs f. beta = 1-power is the false negative rate
@@ -1365,6 +1365,6 @@ def Multiple_tests_3classes(features,featurenames,classname,Rsubsamples,fmin,fma
         results = model.fit()
         #
         df = results.df_resid
-        pvalb_beta[m] = ss.t.cdf(results.tvalues[1], df)
+        pp_beta[m] = ss.t.cdf(results.tvalues[1], df)
         
-    return R2,slope_Lnpval,ciL_slope_Lnpval,ciU_slope_Lnpval,intercept_Lnpval,ciL_intercept_Lnpval,ciU_intercept_Lnpval,pvalb,pvalb_beta
+    return pp,pp_beta
